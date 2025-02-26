@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:bla_bla_project/screens/location_picker_screen.dart';
 import 'package:bla_bla_project/theme/theme.dart';
+import 'package:bla_bla_project/utils/animations_util.dart';
 import 'package:bla_bla_project/widgets/actions/bla_button.dart';
 import 'package:bla_bla_project/widgets/display/bla_divider.dart';
 import 'package:flutter/material.dart';
@@ -77,10 +78,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        LocationPickerScreen(), 
-                  ),
+                  AnimationUtils.createBottomToTopRoute(LocationPickerScreen()),
                 );
               },
               focusNode: _focusNodeLocation),
