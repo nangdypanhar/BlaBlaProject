@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:bla_bla_project/screens/location_picker_screen.dart';
+import 'package:bla_bla_project/screens/seat_spinner_screen.dart';
 import 'package:bla_bla_project/theme/theme.dart';
 import 'package:bla_bla_project/utils/animations_util.dart';
 import 'package:bla_bla_project/widgets/actions/bla_button.dart';
@@ -94,7 +93,12 @@ class _RidePrefFormState extends State<RidePrefForm> {
           customInputField(
               hintText: "Passenger",
               icon: Icon(Icons.person_outline_sharp),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SeatSpinnerScreen()));
+              },
               focusNode: _focusNodeLocation),
           SizedBox(height: 10),
           BlaButton(text: "Search", onPressed: () {}),
