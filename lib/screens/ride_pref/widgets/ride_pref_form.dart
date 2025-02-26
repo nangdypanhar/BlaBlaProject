@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:bla_bla_project/screens/location_picker_screen.dart';
 import 'package:bla_bla_project/theme/theme.dart';
 import 'package:bla_bla_project/widgets/actions/bla_button.dart';
 import 'package:bla_bla_project/widgets/display/bla_divider.dart';
@@ -65,7 +66,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
         children: [
           customInputField(
               hintText: "Location",
-                icon: Icon(Icons.circle_outlined),
+              icon: Icon(Icons.circle_outlined),
               onTap: () {},
               focusNode: _focusNodeLocation),
           BlaDivider(),
@@ -73,7 +74,15 @@ class _RidePrefFormState extends State<RidePrefForm> {
           customInputField(
               hintText: "Destination",
               icon: Icon(Icons.circle_outlined),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        LocationPickerScreen(), 
+                  ),
+                );
+              },
               focusNode: _focusNodeLocation),
           BlaDivider(),
           SizedBox(height: 10),
@@ -84,12 +93,11 @@ class _RidePrefFormState extends State<RidePrefForm> {
               focusNode: _focusNodeLocation),
           BlaDivider(),
           SizedBox(height: 10),
-           customInputField(
-            hintText: "Passenger",
-            icon: Icon(Icons.person_outline_sharp),
-            onTap: () {},
-            focusNode: _focusNodeLocation
-          ),
+          customInputField(
+              hintText: "Passenger",
+              icon: Icon(Icons.person_outline_sharp),
+              onTap: () {},
+              focusNode: _focusNodeLocation),
           SizedBox(height: 10),
           BlaButton(text: "Search", onPressed: () {}),
         ],
@@ -104,22 +112,21 @@ Widget customInputField({
   required Icon icon,
   required VoidCallback onTap,
 }) {
-  return 
-   Material(
-      borderRadius: BorderRadius.circular(12),
-      child: TextFormField(
-        onTap: onTap,
-        focusNode: focusNode,
-        readOnly: true,
-        decoration: InputDecoration(
-            prefixIcon: Icon(icon.icon, color: BlaColors.neutralDark),
-            hintText: hintText,
-            hintStyle: TextStyle(color: BlaColors.neutralDark),
-            contentPadding:
-                EdgeInsets.symmetric(vertical: 12.0, horizontal: 15.0),
-            filled: true,
-            fillColor: focusNode.hasFocus ? Colors.grey[200] : Colors.white,
-            border: InputBorder.none),
-      ),
-    );
+  return Material(
+    borderRadius: BorderRadius.circular(12),
+    child: TextFormField(
+      onTap: onTap,
+      focusNode: focusNode,
+      readOnly: true,
+      decoration: InputDecoration(
+          prefixIcon: Icon(icon.icon, color: BlaColors.neutralDark),
+          hintText: hintText,
+          hintStyle: TextStyle(color: BlaColors.neutralDark),
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 12.0, horizontal: 15.0),
+          filled: true,
+          fillColor: focusNode.hasFocus ? Colors.grey[200] : Colors.white,
+          border: InputBorder.none),
+    ),
+  );
 }
