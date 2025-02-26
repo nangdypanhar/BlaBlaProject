@@ -39,10 +39,6 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
     });
   }
 
-  // void goBack(){
-  //   Navigator.pop();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,11 +52,11 @@ class _LocationPickerScreenState extends State<LocationPickerScreen> {
                 filled: true,
                 fillColor: BlaColors.greyLight,
                 prefixIcon: IconButton(
-                        onPressed: (){
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(Icons.chevron_left),
-                      ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.chevron_left),
+                ),
                 suffixIcon: clearBtn
                     ? IconButton(
                         onPressed: clearSearch,
