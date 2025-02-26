@@ -1,3 +1,4 @@
+import 'package:bla_bla_project/widgets/actions/bla_button.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/ride_pref/ride_pref.dart';
@@ -28,15 +29,15 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final today = DateTime.now();
-    DateTime stripTime(DateTime date) {
-      return DateTime(date.year, date.month, date.day);
-    }
+    // final today = DateTime.now();
+    // DateTime stripTime(DateTime date) {
+    //   return DateTime(date.year, date.month, date.day);
+    // }
 
-    final todayRides = RidePrefService.ridePrefsHistory
-        .where(
-            (ridePref) => stripTime(ridePref.departureDate) == stripTime(today))
-        .toList();
+    // final todayRides = RidePrefService.ridePrefsHistory
+    //     .where(
+    //         (ridePref) => stripTime(ridePref.departureDate) == stripTime(today))
+    //     .toList();
 
     return Stack(
       children: [
@@ -74,13 +75,21 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
                     child: ListView.builder(
                       shrinkWrap: true, // Fix ListView height issue
                       physics: AlwaysScrollableScrollPhysics(),
-                      itemCount: todayRides.length,
+                      itemCount: RidePrefService.ridePrefsHistory.length,
                       itemBuilder: (ctx, index) => RidePrefHistoryTile(
-                        ridePref: todayRides[index],
-                        onPressed: () => onRidePrefSelected(todayRides[index]),
+                        ridePref: RidePrefService.ridePrefsHistory[index],
+                        onPressed: () => onRidePrefSelected(
+                            RidePrefService.ridePrefsHistory[index]),
                       ),
                     ),
                   ),
+
+                  BlaButton(
+                    text: "Request to Book",
+                    icon: Icon(Icons.date_range_rounded),
+                    onPressed: (){},
+                  ),
+
                 ],
               ),
             ),
