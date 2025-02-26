@@ -1,8 +1,13 @@
+import 'dart:ui';
+
+import 'package:bla_bla_project/theme/theme.dart';
+import 'package:bla_bla_project/widgets/actions/bla_button.dart';
+import 'package:bla_bla_project/widgets/display/bla_divider.dart';
 import 'package:flutter/material.dart';
- 
+
 import '../../../model/ride/locations.dart';
 import '../../../model/ride_pref/ride_pref.dart';
- 
+
 ///
 /// A Ride Preference From is a view to select:
 ///   - A depcarture location
@@ -27,8 +32,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
   late DateTime departureDate;
   Location? arrival;
   late int requestedSeats;
-
-
+  final FocusNode _focusNodeLocation = FocusNode();
 
   // ----------------------------------
   // Initialize the Form attributes
@@ -37,29 +41,85 @@ class _RidePrefFormState extends State<RidePrefForm> {
   @override
   void initState() {
     super.initState();
-    // TODO 
+    // TODO
   }
 
   // ----------------------------------
   // Handle events
   // ----------------------------------
- 
 
   // ----------------------------------
   // Compute the widgets rendering
   // ----------------------------------
-  
 
   // ----------------------------------
   // Build the widgets
   // ----------------------------------
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [ 
- 
-        ]);
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          customInputField(
+              hintText: "Location",
+                icon: Icon(Icons.circle_outlined),
+              onTap: () {},
+              focusNode: _focusNodeLocation),
+          BlaDivider(),
+          SizedBox(height: 10),
+          customInputField(
+              hintText: "Destination",
+              icon: Icon(Icons.circle_outlined),
+              onTap: () {},
+              focusNode: _focusNodeLocation),
+          BlaDivider(),
+          SizedBox(height: 10),
+          customInputField(
+              hintText: "Today",
+              icon: Icon(Icons.calendar_month_rounded),
+              onTap: () {},
+              focusNode: _focusNodeLocation),
+          BlaDivider(),
+          SizedBox(height: 10),
+           customInputField(
+            hintText: "Passenger",
+            icon: Icon(Icons.person_outline_sharp),
+            onTap: () {},
+            focusNode: _focusNodeLocation
+          ),
+          SizedBox(height: 10),
+          BlaButton(text: "Search", onPressed: () {}),
+        ],
+      ),
+    );
   }
+}
+
+Widget customInputField({
+  required FocusNode focusNode,
+  required String hintText,
+  required Icon icon,
+  required VoidCallback onTap,
+}) {
+  return 
+   Material(
+      borderRadius: BorderRadius.circular(12),
+      child: TextFormField(
+        onTap: onTap,
+        focusNode: focusNode,
+        readOnly: true,
+        decoration: InputDecoration(
+            prefixIcon: Icon(icon.icon, color: BlaColors.neutralDark),
+            hintText: hintText,
+            hintStyle: TextStyle(color: BlaColors.neutralDark),
+            contentPadding:
+                EdgeInsets.symmetric(vertical: 12.0, horizontal: 15.0),
+            filled: true,
+            fillColor: focusNode.hasFocus ? Colors.grey[200] : Colors.white,
+            border: InputBorder.none),
+      ),
+    );
 }

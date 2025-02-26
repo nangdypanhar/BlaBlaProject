@@ -84,12 +84,11 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
                     ),
                   ),
 
-                  BlaButton(
-                    text: "Request to Book",
-                    icon: Icon(Icons.date_range_rounded),
-                    onPressed: (){},
-                  ),
-
+                  // BlaButton(
+                  //   text: "Request to Book",
+                  //   icon: Icon(Icons.date_range_rounded),
+                  //   onPressed: (){},
+                  // ),
                 ],
               ),
             ),
