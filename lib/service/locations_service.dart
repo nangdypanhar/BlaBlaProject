@@ -1,12 +1,13 @@
+import 'package:bla_bla_project/dummy_data/dummy_data.dart';
 import 'package:bla_bla_project/model/ride/locations.dart';
-
-import '../dummy_data/dummy_data.dart';
 
 ////
 ///   This service handles:
 ///   - The list of available rides
 ///
 class LocationsService {
-  static const List<Location> availableLocations =
-      fakeLocations; // TODO for now fake data
+
+
+  static  List<Location>  availableLocations = fakeLocations;
+
 }

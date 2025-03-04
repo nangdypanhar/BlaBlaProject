@@ -1,5 +1,3 @@
-
-
 import 'package:bla_bla_project/model/ride/locations.dart';
 
 import '../../utils/date_time_util.dart';
