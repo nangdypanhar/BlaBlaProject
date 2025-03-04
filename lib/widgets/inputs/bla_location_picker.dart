@@ -18,6 +18,7 @@ class BlaLocationPicker extends StatefulWidget {
 
 class _BlaLocationPickerState extends State<BlaLocationPicker> {
   List<Location> filteredLocations = [];
+  List<Location> availableLocations = LocationsService.instance.availableLocations;
 
   // ----------------------------------
   // Initialize the Form attributes
@@ -54,7 +55,7 @@ class _BlaLocationPickerState extends State<BlaLocationPicker> {
   }
 
   List<Location> getLocationsFor(String text) {
-    return LocationsService.availableLocations
+    return availableLocations
         .where((location) =>
             location.name.toUpperCase().contains(text.toUpperCase()) || location.country.name.toUpperCase().contains(text.toUpperCase()))
         .toList();
