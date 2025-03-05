@@ -34,12 +34,18 @@ class RidesService {
   ///
   ///  Return the relevant rides, given the passenger preferences
   ///
-    List<Ride> getRidesFor(RidePreference preferences, RidesFilter? filter) {
-      return repository.getRides(preferences, filter);
+    List<Ride> getRidesFor(RidePreference preferences,{ RidesFilter? filter, RidesSortType? sort}) {
+      return repository.getRides(preferences, filter, sort);
   }
 }
 
 class RidesFilter {
-  final bool? acceptPets;
+  final bool acceptPets;
   const RidesFilter({this.acceptPets = false});
+}
+
+
+class RidesSortType{
+  final bool departureDate;
+  const RidesSortType({this.departureDate = false});
 }

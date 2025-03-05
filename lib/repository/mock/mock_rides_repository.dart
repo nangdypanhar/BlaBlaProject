@@ -9,56 +9,56 @@ class MockRidesRepository extends RidesRepository {
   final List<Ride> _rides = [
     Ride(
       departureLocation: Location(name: 'Battambang', country: Country.kh),
-      departureDate: DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, 5, 30), 
+      departureDate: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day, 5, 30),
       arrivalLocation: Location(name: 'Siem Reap', country: Country.kh),
-      arrivalDateTime: DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, 7, 30), 
+      arrivalDateTime: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day, 7, 30),
       driver: User(firstName: 'Kannika', lastName: 'Kannika', phone: "0999999"),
       availableSeats: 2,
       pricePerSeat: 10.0,
     ),
     Ride(
       departureLocation: Location(name: 'Battambang', country: Country.kh),
-      departureDate: DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, 8), 
+      departureDate: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day, 8),
       arrivalLocation: Location(name: 'Sieam Reap', country: Country.kh),
-      arrivalDateTime: DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, 10), 
+      arrivalDateTime: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day, 10),
       driver: User(firstName: 'Chaylim', lastName: 'Chaylim', phone: "0999999"),
       availableSeats: 2,
       pricePerSeat: 10.0,
     ),
     Ride(
       departureLocation: Location(name: 'Battambang', country: Country.kh),
-      departureDate: DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, 5), 
+      departureDate: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day, 5),
       arrivalLocation: Location(name: 'Sieam Reap', country: Country.kh),
-      arrivalDateTime: DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, 8), 
-      driver: User(firstName: 'Mengtech', lastName: 'Mengtech', phone: "0999999"),
+      arrivalDateTime: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day, 8),
+      driver:
+          User(firstName: 'Mengtech', lastName: 'Mengtech', phone: "0999999"),
       availableSeats: 2,
       pricePerSeat: 10.0,
     ),
-     Ride(
+    Ride(
+        departureLocation: Location(name: 'Battambang', country: Country.kh),
+        departureDate: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day, 20),
+        arrivalLocation: Location(name: 'Sieam Reap', country: Country.kh),
+        arrivalDateTime: DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day, 22),
+        driver: User(firstName: 'Limhoa', lastName: 'Limhoa', phone: "0999999"),
+        availableSeats: 2,
+        pricePerSeat: 10.0,
+        acceptedPets: true),
+    Ride(
       departureLocation: Location(name: 'Battambang', country: Country.kh),
-      departureDate: DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, 20), 
+      departureDate: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day, 5),
       arrivalLocation: Location(name: 'Sieam Reap', country: Country.kh),
-      arrivalDateTime: DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, 22), 
-      driver: User(firstName: 'Limhoa', lastName: 'Limhoa', phone: "0999999"),
-      availableSeats: 2,
-      pricePerSeat: 10.0,
-      acceptedPets: true
-    ),
-     Ride(
-      departureLocation: Location(name: 'Battambang', country: Country.kh),
-      departureDate: DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, 5), 
-      arrivalLocation: Location(name: 'Sieam Reap', country: Country.kh),
-      arrivalDateTime: DateTime(DateTime.now().year, DateTime.now().month,
-          DateTime.now().day, 8), 
+      arrivalDateTime: DateTime(
+          DateTime.now().year, DateTime.now().month, DateTime.now().day, 8),
       driver: User(firstName: 'Sovanda', lastName: 'Sovanda', phone: "0999999"),
       availableSeats: 2,
       pricePerSeat: 10.0,
@@ -66,12 +66,18 @@ class MockRidesRepository extends RidesRepository {
   ];
 
   @override
-  List<Ride> getRides(RidePreference preference, RidesFilter? filter) {
-    if (filter == null) {
-      return _rides;
+  List<Ride> getRides(
+      RidePreference preference, RidesFilter? filter, RidesSortType? sort) {
+    List<Ride> filteredRides = _rides;
+    if (filter != null && filter.acceptPets == true) {
+      filteredRides = filteredRides
+          .where((ride) => ride.acceptedPets == filter.acceptPets)
+          .toList();
     }
-    return _rides
-        .where((ride) => ride.acceptedPets == filter.acceptPets)
-        .toList();
+
+    if (sort != null && sort.departureDate == true) {
+      filteredRides.sort((a, b) => a.departureDate.compareTo(b.departureDate));
+    }
+    return filteredRides;
   }
 }
