@@ -17,4 +17,9 @@ class User {
       this.email,
       this.profilePicture,
       this.verifiedProfile});
+
+  @override
+   String toString(){
+     return 'User : $firstName';
+   }
 }

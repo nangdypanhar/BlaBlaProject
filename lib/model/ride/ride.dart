@@ -57,6 +57,7 @@ class Ride {
     return 'Ride from $departureLocation at ${DateTimeUtils.formatDateTime(departureDate)} '
         'to $arrivalLocation '  
         'Duration: $duration'  
-        '  Accept Pet: $acceptedPets';
+        '  Accept Pet: $acceptedPets'
+        '  User: $driver';
   }
 }
