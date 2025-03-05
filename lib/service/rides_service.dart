@@ -1,4 +1,5 @@
 import 'package:bla_bla_project/model/ride_pref/ride_pref.dart';
+import 'package:bla_bla_project/repository/rides_repository.dart';
 import '../dummy_data/dummy_data.dart';
 import '../model/ride/ride.dart';
 
@@ -7,17 +8,38 @@ import '../model/ride/ride.dart';
 ///   - The list of available rides
 ///
 class RidesService {
+  static List<Ride> availableRides = fakeRides;
+   
+   RidesRepository repository;
+   static RidesService? _instance;
 
-  static List<Ride> availableRides = fakeRides;  
+   RidesService._internal(this.repository);
+
+ static void initialize(RidesRepository repository) {
+    if (_instance == null) {
+      _instance = RidesService._internal(repository);
+    } else {
+      throw Exception("RideService is already initialized.");
+    }
+  }
+
+    static RidesService get instance {
+    if (_instance == null) {
+		  throw Exception("RidePreferencesService is not initialized. Call initialize() first.");
+		}
+		return _instance!;
+  }
 
 
   ///
   ///  Return the relevant rides, given the passenger preferences
   ///
-  static List<Ride> getRidesFor(RidePreference preferences) {
- 
-    // For now, just a test
-    return availableRides.where( (ride) => ride.departureLocation == preferences.departure && ride.arrivalLocation == preferences.arrival).toList();
+    List<Ride> getRidesFor(RidePreference preferences, RidesFilter? filter) {
+      return repository.getRides(preferences, filter);
   }
- 
+}
+
+class RidesFilter {
+  final bool? acceptPets;
+  const RidesFilter({this.acceptPets = false});
 }

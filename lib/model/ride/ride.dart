@@ -1,5 +1,4 @@
 import 'package:bla_bla_project/model/ride/locations.dart';
-
 import '../../utils/date_time_util.dart';
 import '../user/user.dart';
 
@@ -24,20 +23,28 @@ class Ride {
 
   final int availableSeats;
   final double pricePerSeat;
+  final bool? acceptedPets;
 
   RideStatus status = RideStatus.created;
 
   final List<User> passengers = [];
 
-  Ride({
-    required this.departureLocation,
-    required this.departureDate,
-    required this.arrivalLocation,
-    required this.arrivalDateTime,
-    required this.driver,
-    required this.availableSeats,
-    required this.pricePerSeat,
-  });
+  Ride(
+      {required this.departureLocation,
+      required this.departureDate,
+      required this.arrivalLocation,
+      required this.arrivalDateTime,
+      required this.driver,
+      required this.availableSeats,
+      required this.pricePerSeat,
+      this.acceptedPets = false});
+
+  String get duration {
+    final duration = arrivalDateTime.difference(departureDate);
+    final hours = duration.inHours;
+
+    return '${hours}h';
+  }
 
   void addPassenger(User passenger) {
     passengers.add(passenger);
@@ -48,7 +55,8 @@ class Ride {
   @override
   String toString() {
     return 'Ride from $departureLocation at ${DateTimeUtils.formatDateTime(departureDate)} '
-        'to $arrivalLocation arriving at ${DateTimeUtils.formatDateTime(arrivalDateTime)}, '
-        'Driver: $driver, Seats: $availableSeats, Price: \$${pricePerSeat.toStringAsFixed(2)}';
+        'to $arrivalLocation '  
+        'Duration: $duration'  
+        '  Accept Pet: $acceptedPets';
   }
 }

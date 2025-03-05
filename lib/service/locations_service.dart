@@ -23,7 +23,7 @@ class LocationsService {
 
     static LocationsService get instance {
     if (_instance == null) {
-		  throw Exception("RidePreferencesService is not initialized. Call initialize() first.");
+		  throw Exception("LocationsService is not initialized. Call initialize() first.");
 		}
 		return _instance!;
   }

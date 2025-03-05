@@ -9,15 +9,16 @@ class DateTimeUtils {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final targetDate = DateTime(dateTime.year, dateTime.month, dateTime.day);
+    final timeFormatted = DateFormat('h:mm a').format(dateTime); 
 
     if (targetDate == today) {
-      return 'Today';
+      return 'Today $timeFormatted';
     } else if (targetDate == today.subtract(Duration(days: 1))) {
-      return 'Yesterday';
+      return 'Yesterday $timeFormatted';
     } else if (targetDate == today.add(Duration(days: 1))) {
-      return 'Tomorrow';
+      return 'Tomorrow $timeFormatted';
     } else {
-      return DateFormat('E d MMM').format(dateTime); // Example: Wed 12 Feb
+     return '${DateFormat('E d MMM').format(dateTime)} $timeFormatted'; // Example: Wed 12 Feb
     }
   }
 
