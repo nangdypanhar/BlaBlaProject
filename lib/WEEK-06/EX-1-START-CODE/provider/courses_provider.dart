@@ -8,4 +8,14 @@ class CoursesProvider extends ChangeNotifier {
 
   List<Course> get getCourses => _courseRepository.getCourses();
 
+  void addScore(Course course, CourseScore score) {
+    _courseRepository.addScore(course, score);
+    notifyListeners();
+  }
+
+  Course getCourseFor(String courseId) {
+    return getCourses.firstWhere(
+      (course) => course.courseId == courseId,
+    );
+  }
 }

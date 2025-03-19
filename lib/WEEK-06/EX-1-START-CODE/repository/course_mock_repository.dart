@@ -12,6 +12,7 @@ class CourseMockRepository extends CourseRepository {
   @override
   List<Course> getCourses() => courses;
 
+  @override
   void addScore(Course course, CourseScore score) {
     final index = courses.indexWhere((c) => c.courseId == course.courseId);
     if (index != -1) {
